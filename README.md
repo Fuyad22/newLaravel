@@ -54,6 +54,81 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## React Router Setup
+
+This project includes a React SPA with properly configured React Router v6 for client-side navigation.
+
+### Frontend Stack
+
+- **React 18.x** - UI library
+- **React Router DOM v6.x** - Client-side routing with BrowserRouter
+- **Vite** - Fast build tool
+- **Tailwind CSS** - Styling framework
+
+### Key Features
+
+- ✅ **Client-side navigation** - Links navigate without full page reloads
+- ✅ **React Router v6 syntax** - Uses `<Routes>` and `element` prop
+- ✅ **BrowserRouter** - Clean URLs without hash symbols
+- ✅ **404 catch-all route** - Handles unmatched paths gracefully
+- ✅ **Laravel SPA fallback** - Deep links and page refreshes work correctly
+
+### Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server (hot reload)
+npm run dev
+
+# Build for production
+npm run build
+```
+
+### SPA Routing Configuration
+
+The Laravel backend includes a catch-all route in `routes/web.php` that serves the React app for any unmatched path:
+
+```php
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
+```
+
+This ensures that:
+- Direct navigation to client-side routes (e.g., `/about`) works correctly
+- Page refreshes on any route load the SPA properly
+- React Router handles all routing on the client side
+
+**To disable SPA routing**: Remove or comment out the catch-all route in `routes/web.php` and define specific Laravel routes instead.
+
+### Project Structure
+
+```
+resources/
+├── css/
+│   └── app.css              # Tailwind CSS and global styles
+├── js/
+│   ├── app.jsx              # React entry point with BrowserRouter
+│   ├── App.jsx              # Main app component with Routes
+│   └── pages/               # Page components
+│       ├── Home.jsx
+│       ├── About.jsx
+│       └── NotFound.jsx     # 404 page
+├── views/
+│   └── app.blade.php        # Laravel blade view serving the React app
+routes/
+└── web.php                  # Laravel routes with SPA fallback
+```
+
+### Testing Client-Side Navigation
+
+1. Start the dev server: `npm run dev`
+2. Visit the app and click navigation links - no page reload should occur
+3. Navigate to `/about` directly in the browser - should load correctly
+4. Refresh the page on `/about` - should stay on the same route
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
