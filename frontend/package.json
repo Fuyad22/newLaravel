@@ -1,0 +1,24 @@
+{
+  "name": "newlaravel-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://Fuyad22.github.io/newLaravel",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.0",
+    "vite": "^5.0.0",
+    "gh-pages": "^6.1.0"
+  },
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "vite build --base=/newLaravel/ && gh-pages -d dist"
+  }
+}
